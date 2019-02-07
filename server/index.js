@@ -2,14 +2,19 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const serveStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
+const koaLogger = require('koa-logger-winston');
 
 const APIError = require('./apiError');
 const Config = require('./config');
 const logger = require('./logger');
-// const routes = require('./routes');
+const stops = require('./stops');
+const trips = require('./trips');
+const websocket = require('./websocket');
 
 const app = new Koa();
-const router = new Router();
+
+// logging
+app.use(koaLogger(logger));
 
 // static files
 app.use(serveStatic('./build'));
@@ -37,9 +42,15 @@ app.on('error', (err, _ctx_) => {
 app.use(bodyParser());
 
 // routes
-// routes.install(router);
-// app.use(router.routes()).use(router.allowedMethods());
+const router = new Router({ prefix: '/api' });
+router.use('/stops', stops.router.routes(), stops.router.allowedMethods());
+router.use('/trips', trips.router.routes(), trips.router.allowedMethods());
+app.use(router.routes());
 
-const port = Config.server.port;
+let port = Config.server.port;
 app.listen(port);
-logger.info(`Server listening on port ${port}`);
+logger.info(`HTTP server listening on port ${port}`);
+
+port = Config.server.wsPort;
+websocket.listen(port);
+logger.info(`WebSocket server listening on port ${port}`);

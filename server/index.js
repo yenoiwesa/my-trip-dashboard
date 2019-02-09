@@ -9,7 +9,6 @@ const Config = require('./config');
 const logger = require('./logger');
 const stops = require('./stops');
 const trips = require('./trips');
-const websocket = require('./websocket');
 
 const app = new Koa();
 
@@ -49,8 +48,4 @@ app.use(router.routes());
 
 let port = Config.server.port;
 app.listen(port);
-logger.info(`HTTP server listening on port ${port}`);
-
-port = Config.server.wsPort;
-websocket.listen(port);
-logger.info(`WebSocket server listening on port ${port}`);
+logger.info(`Server listening on port ${port}`);

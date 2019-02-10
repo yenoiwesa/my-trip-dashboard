@@ -3,11 +3,15 @@ import './App.scss';
 import React, { Component } from 'react';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
-
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
+import EditPanel from './components/EditPanel';
+
 const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true
+    },
     palette: {
         primary: blue,
         secondary: {
@@ -24,6 +28,7 @@ class App extends Component {
                     <IconButton color="primary" aria-label="Settings">
                         <MoreHoriz />
                     </IconButton>
+                    <EditPanel />
                 </div>
             </MuiThemeProvider>
         );

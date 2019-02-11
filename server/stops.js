@@ -5,6 +5,10 @@ const { TRANSPORT_API_URL, TRANSPORT_TYPES } = require('./constants');
 const Config = require('./config');
 const { getQueryParam } = require('./apiUtils');
 
+const MAX_RESULTS = 5;
+
+const ALLOWED_MODES = new Set(['train', 'light rail', 'bus', 'ferry']);
+
 const posts = new Router();
 
 const getStops = async name => {
@@ -32,13 +36,41 @@ const getStops = async name => {
 
     if (json.locations) {
         for (const location of json.locations) {
+            // parse and filter modes
+            const modes = [];
+            (location.productClasses || []).forEach(productClass => {
+                const mode = TRANSPORT_TYPES[productClass];
+                if (ALLOWED_MODES.has(mode)) {
+                    modes.push(mode);
+                }
+            });
+
+            if (!modes.length) {
+                continue;
+            }
+
             const stop = {
                 id: location.id,
                 name: location.disassembledName,
-                modes: (location.productClasses || []).map(productClass => TRANSPORT_TYPES[productClass])
+                modes: modes
             };
 
+            // try to get better name
+            if (location.assignedStops && location.assignedStops.length) {
+                const assignedStopName = location.assignedStops[0].name;
+                stop.name = assignedStopName || stop.name;
+            }
+
+            // extract locality
+            if (location.parent && location.parent.type === 'locality') {
+                stop.locality = location.parent.name;
+            }
+
             results.push(stop);
+
+            if (results.length >= MAX_RESULTS) {
+                break;
+            }
         }
     }
 

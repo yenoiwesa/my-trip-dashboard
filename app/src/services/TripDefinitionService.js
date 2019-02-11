@@ -15,13 +15,14 @@ class TripDefinitionService extends BehaviorSubject {
     }
 
     removeTrip(tripDefinition) {
-        this.tripDefinitions.filter(tripDef => tripDef === tripDefinition);
+        this.tripDefinitions = this.tripDefinitions.filter(tripDef => tripDef.id !== tripDefinition.id);
         this.persist();
         this.notify();
     }
 
     notify() {
-        this.next(this.tripDefinitions);
+        // must send a new object every time
+        this.next(this.tripDefinitions.slice());
     }
 
     persist() {

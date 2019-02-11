@@ -6,6 +6,8 @@ const { TRANSPORT_API_URL, TRANSPORT_TYPES } = require('./constants');
 const Config = require('./config');
 const { getQueryParam } = require('./apiUtils');
 
+const MAX_RESULTS = 3;
+
 const getTripDetails = async (origin, originOffset, destination, destinationOffset) => {
     const url = new URL(TRANSPORT_API_URL + '/v1/tp/trip');
     const params = {
@@ -58,7 +60,7 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
                 modes.add(TRANSPORT_TYPES[leg.transportation.product.class]);
 
                 if (leg.stopSequence) {
-                    stops += Math.max(leg.stopSequence.length - 2, 0);
+                    stops += Math.max(leg.stopSequence.length - 1, 0);
                 }
 
                 // use the departure details of the first leg for the whole trip
@@ -102,6 +104,10 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
             trip.offsetDuration = trip.duration + originOffset + destinationOffset;
 
             results.push(trip);
+
+            if (results.length >= MAX_RESULTS) {
+                break;
+            }
         }
     }
 

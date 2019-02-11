@@ -1,0 +1,30 @@
+@import 'styles/layout';
+
+.StopModes {
+    flex: 0;
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    > * {
+        display: flex;
+        list-style: none;
+        margin-left: $set-one;
+
+        > img {
+            width: $set-three;
+            height: $set-three;
+        }
+    }
+}
+
+.StopModes-small {
+    > * {
+        margin-left: $set-half;
+
+        > img {
+            width: $set-two;
+            height: $set-two;
+        }
+    }
+}

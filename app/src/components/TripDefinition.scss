@@ -1,0 +1,32 @@
+@import 'styles/layout';
+@import 'styles/typography';
+
+.TripDefinition {
+    padding: $set-onehalf $set-two;
+}
+
+.TripDefinition-content {
+    display: flex;
+    align-items: center;
+}
+
+.TripDefinition-title {
+    font-size: $font-xl;
+    margin-bottom: $set-onehalf;
+}
+
+.TripDefinition-details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-top: $set-onehalf;
+}
+
+.TripDefinition-actions {
+    flex: 0;
+}
+
+.TripDefinition-divider {
+    color: $text-muted;
+    margin: 0 $set-two;
+}

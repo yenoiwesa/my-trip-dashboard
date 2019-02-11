@@ -1,0 +1,36 @@
+@import 'styles/layout';
+
+.Trip {
+    padding: $set-three $set-four;
+}
+
+.Trip-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.00833em;
+    margin: 0;
+    margin-bottom: $set-three;
+}
+
+.Trip-schedules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    > * {
+        margin-bottom: $set-three;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .Trip-title {
+        font-size: 40px;
+        margin-bottom: $set-four;
+    }
+}

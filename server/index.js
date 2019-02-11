@@ -16,7 +16,7 @@ const app = new Koa();
 app.use(koaLogger(logger));
 
 // static files
-app.use(serveStatic('./build'));
+app.use(serveStatic('./app/build'));
 
 // error handling
 app.use(async (ctx, next) => {

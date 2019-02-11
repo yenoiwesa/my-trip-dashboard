@@ -1,0 +1,43 @@
+@import 'styles/layout';
+
+$divider: 1px solid #0000001f;
+
+.DisplayPanel {
+    flex: 1;
+}
+
+.DisplayPanel-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    > * {
+        flex: 1;
+        border-bottom: $divider;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.DisplayPanel-settings-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+@media only screen and (min-width: 1000px) {
+    .DisplayPanel-content {
+        flex-direction: row;
+
+        > * {
+            border-bottom: none;
+            border-right: $divider;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@import 'styles/typography';
+@import 'styles/layout';
+
+.TripSection {
+    font-size: $font-md;
+
+    > * {
+        margin-bottom: $set-half;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.TripSection-details {
+    display: flex;
+    align-items: center;
+}
+
+.TripSection-name {
+    font-weight: 500;
+}
+
+.TripSection-locality {
+    color: $text-muted;
+}

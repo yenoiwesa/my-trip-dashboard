@@ -1,0 +1,30 @@
+@import 'styles/layout';
+
+.TripDefinitionForm {
+    display: block;
+    padding: $set-two $set-three;
+}
+
+.TripDefinitionForm-heading {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.17;
+    letter-spacing: 0.00735em;
+    margin: 0.35em 0;
+
+    :first-child {
+        margin-right: $set-one;
+        color: #8a8a8a;
+    }
+}
+
+.TripDefinitionForm-actions {
+    display: flex;
+    margin-top: $set-one;
+}
+
+.TripDefinitionForm-submit {
+    margin-left: auto;
+}

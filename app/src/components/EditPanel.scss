@@ -1,0 +1,59 @@
+@import 'styles/layout';
+@import 'styles/typography';
+
+.EditPanel {
+    overflow: auto;
+}
+
+.EditPanel-back-btn-icon {
+    margin-right: $set-half;
+}
+
+.EditPanel-main {
+    padding: $set-four;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.EditPanel-trip-details {
+    margin-top: $set-two;
+}
+
+.EditPanel-no-trips {
+    padding: $set-two;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: $font-md;
+    font-weight: 500;
+    color: $text-muted;
+}
+
+.EditPanel-trip-details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > * {
+        margin-bottom: $set-two;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .EditPanel-main {
+        flex-direction: row;
+
+        > * {
+            flex: 1;
+        }
+    }
+
+    .EditPanel-trip-details {
+        margin-top: 0;
+        margin-left: $set-four;
+    }
+}

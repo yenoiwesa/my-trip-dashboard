@@ -1,6 +1,9 @@
 {
     "name": "my-trip-dashboard",
     "version": "1.0.0",
+    "engines": {
+        "node": ">=10.0.0"
+    },
     "description": "Personal NSW Transport Trip Dashboard",
     "scripts": {
         "postinstall": "cd app && npm install",

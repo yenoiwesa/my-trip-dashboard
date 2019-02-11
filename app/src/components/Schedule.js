@@ -1,14 +1,18 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 
 import './Schedule.scss';
+import TimeFromNow from './TimeFromNow';
 
 function Schedule(props) {
     const { schedule } = props;
     return (
-        <Paper className="Schedule" elevation={1}>
-            {schedule.duration}
-        </Paper>
+        <div className="Schedule">
+            <div className="Schedule-depart">
+                <div>Depart</div>
+                <TimeFromNow datetime={schedule.departure.offset} />
+            </div>
+            <div />
+        </div>
     );
 }
 

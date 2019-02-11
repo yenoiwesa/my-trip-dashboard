@@ -1,17 +1,42 @@
 @import 'styles/layout';
+@import 'styles/typography';
 
-.Trip {
-    padding: $set-three $set-four;
+.Trip-heading {
+    color: white;
 }
 
 .Trip-title {
+    background-color: #005996;
+    padding: $set-two;
     text-align: center;
     font-size: 24px;
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.00833em;
     margin: 0;
-    margin-bottom: $set-three;
+}
+
+.Trip-details {
+    background-color: #01497a;
+    color: #ffffffb3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $set-one;
+}
+
+.Trip-connection {
+    display: flex;
+    align-items: center;
+    margin: 0 $set-two;
+
+    > * {
+        font-size: $font-sm;
+    }
+
+    .Trip-dot {
+        font-size: $font-lg;
+    }
 }
 
 .Trip-schedules {
@@ -20,17 +45,16 @@
     padding: 0;
 
     > * {
-        margin-bottom: $set-three;
+        border-bottom: 1px solid #00000008;
 
         &:last-child {
-            margin-bottom: 0;
+            border-bottom: none;
         }
     }
 }
 
 @media only screen and (min-width: 1000px) {
     .Trip-title {
-        font-size: 40px;
-        margin-bottom: $set-four;
+        font-size: 32px;
     }
 }

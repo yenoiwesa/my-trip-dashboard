@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import SettingsIcon from '@material-ui/icons/Settings';
 import IconButton from '@material-ui/core/IconButton';
 
 import './DisplayPanel.scss';
@@ -17,7 +17,7 @@ function DisplayPanel(props) {
     return (
         <div className="DisplayPanel">
             <IconButton className="DisplayPanel-settings-btn" aria-label="Settings" title="Settings" onClick={props.onEdit}>
-                <MoreHoriz />
+                <SettingsIcon />
             </IconButton>
             <div className="DisplayPanel-content">
                 {trips.map(trip => (

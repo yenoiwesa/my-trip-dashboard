@@ -1,16 +1,16 @@
 import React from 'react';
 
-import './StopModes.scss';
+import './Modes.scss';
 import TrainLogo from '../assets/logo-train.svg';
 import FerryLogo from '../assets/logo-ferry.svg';
 import BusLogo from '../assets/logo-bus.svg';
 import LightRailLogo from '../assets/logo-lightrail.svg';
 
-function StopModes(props) {
+function Modes(props) {
     const { modes } = props;
 
     return (
-        <ul className={`StopModes ${props.small ? 'StopModes-small' : ''}`}>
+        <ul className={`Modes ${props.small ? 'Modes-small' : ''}`}>
             {modes.map(mode => {
                 let src;
                 let alt;
@@ -46,4 +46,4 @@ function StopModes(props) {
     );
 }
 
-export default StopModes;
+export default Modes;

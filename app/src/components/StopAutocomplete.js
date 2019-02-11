@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { debounce } from 'lodash';
 
 import './StopAutocomplete.scss';
-import StopModes from './StopModes';
+import Modes from './Modes';
 
 const styles = theme => ({
     container: {
@@ -98,7 +98,7 @@ function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, sele
             }}
         >
             <div className="StopAutocomplete-stop-name">{suggestion.name}</div>
-            <StopModes modes={suggestion.modes} />
+            <Modes modes={suggestion.modes} />
         </MenuItem>
     );
 }

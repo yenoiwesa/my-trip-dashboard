@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './TripSection.scss';
-import StopModes from './StopModes';
+import Modes from './Modes';
 
 function TripSection(props) {
     const { stop, offset } = props;
@@ -11,7 +11,7 @@ function TripSection(props) {
             <div className="TripSection-name">{stop.name}</div>
             <div className="TripSection-details">
                 <div className="TripSection-locality">{stop.locality}</div>
-                <StopModes modes={stop.modes} small />
+                <Modes modes={stop.modes} small />
             </div>
             <div className="TripSection-offset"> {offset} min walk</div>
         </div>

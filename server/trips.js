@@ -9,11 +9,15 @@ const { getQueryParam } = require('./apiUtils');
 const MAX_RESULTS = 3;
 
 const getTripDetails = async (origin, originOffset, destination, destinationOffset) => {
+    const now = moment();
+
     const url = new URL(TRANSPORT_API_URL + '/v1/tp/trip');
     const params = {
         outputFormat: 'rapidJSON',
         coordOutputFormat: 'EPSG:4326',
         depArrMacro: 'dep',
+        itdDate: now.format('YYYYMMDD'),
+        itdTime: now.format('HHmm'),
         // eslint-disable-next-line camelcase
         type_origin: 'any',
         // eslint-disable-next-line camelcase

@@ -1,0 +1,16 @@
+@import 'styles/layout';
+@import 'styles/typography';
+@import 'styles/colors';
+
+.ScheduleDepArrTime {
+    display: flex;
+}
+
+.ScheduleDepArrTime-separator {
+    margin: 0 $set-half;
+}
+
+.ScheduleDepArrTime-departure-late,
+.ScheduleDepArrTime-arrival-late {
+    color: $warning-color;
+}

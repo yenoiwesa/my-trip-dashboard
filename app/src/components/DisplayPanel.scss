@@ -1,14 +1,20 @@
 @import 'styles/layout';
 @import 'styles/colors';
+@import 'styles/typography';
 
 .DisplayPanel {
     flex: 1;
+    overflow: hidden;
+    color: #28404f;
+    background-color: white;
+    font-size: $font-md;
 }
 
 .DisplayPanel-content {
+    height: 100%;
+    overflow: auto;
     display: flex;
     flex-direction: column;
-    height: 100%;
 
     > * {
         flex: 1;
@@ -27,6 +33,10 @@
 }
 
 @media only screen and (min-width: 1000px) {
+    .DisplayPanel {
+        font-size: $font-lg;
+    }
+
     .DisplayPanel-content {
         flex-direction: row;
     }

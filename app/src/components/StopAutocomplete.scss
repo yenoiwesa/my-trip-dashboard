@@ -1,3 +1,11 @@
+@import 'styles/layout';
+
 .StopAutocomplete-stop-name {
     flex: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.StopAutocomplete-stop-mode {
+    margin-left: $set-one;
 }

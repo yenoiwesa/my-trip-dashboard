@@ -6,7 +6,7 @@ const { TRANSPORT_API_URL, TRANSPORT_TYPES } = require('./constants');
 const Config = require('./config');
 const { getQueryParam } = require('./apiUtils');
 
-const MAX_RESULTS = 3;
+const MAX_RESULTS = 5;
 
 const getTripDetails = async (origin, originOffset, destination, destinationOffset) => {
     const departureDatetime = moment().add(originOffset, 's');
@@ -26,7 +26,7 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
         type_destination: 'any',
         // eslint-disable-next-line camelcase
         name_destination: destination,
-        calcNumberOfTrips: 3,
+        calcNumberOfTrips: 4,
         excludedMeans: 'checkbox',
         // exclude bus
         // eslint-disable-next-line camelcase
@@ -37,8 +37,8 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
         // exclude school bus
         // eslint-disable-next-line camelcase
         exclMOT_11: 1,
-        TfNSWSF: true,
-        version: '10.2.1.42'
+        TfNSWTR: true,
+        version: '10.2.2.48'
     };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -53,15 +53,18 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
 
     if (json.journeys) {
         for (const journey of json.journeys) {
-            const trip = { duration: 0 };
+            const trip = { duration: 0, transportations: [] };
             const modes = new Set();
             let stops = 0;
 
             for (let legIndex = 0; legIndex < journey.legs.length; legIndex++) {
                 const leg = journey.legs[legIndex];
+                const transportation = leg.transportation;
 
                 trip.duration += leg.duration;
-                modes.add(TRANSPORT_TYPES[leg.transportation.product.class]);
+                const mode = TRANSPORT_TYPES[transportation.product.class];
+                trip.transportations.push({ id: transportation.id, mode, name: transportation.disassembledName });
+                modes.add(mode);
 
                 if (leg.stopSequence) {
                     stops += Math.max(leg.stopSequence.length - 1, 0);

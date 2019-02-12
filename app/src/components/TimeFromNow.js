@@ -1,37 +1,50 @@
-import React from 'react';
-import { pad } from 'lodash';
+import React, { useState, useEffect } from 'react';
+import { padStart } from 'lodash';
+
+import './TimeFromNow.scss';
 
 function TimeFromNow(props) {
-    const datetime = new Date(props.datetime);
-    const now = new Date();
-    let seconds = Math.floor((datetime - now) / 1000);
+    const [now, setNow] = useState(new Date());
+    useEffect(() => {
+        const intervalId = setInterval(() => setNow(new Date()), 1000);
+        return () => clearInterval(intervalId);
+    }, []);
 
-    const ago = seconds < 0 ? <span>ago</span> : null;
-    seconds = Math.abs(seconds);
+    const seconds = Math.floor((new Date(props.datetime) - now) / 1000);
 
-    if (seconds < 60) {
+    const isPassed = seconds < 0;
+    const absoluteSeconds = Math.abs(seconds);
+    const ago = isPassed ? <span>ago</span> : null;
+    const passedClass = isPassed ? 'TimeFromNow-passed' : '';
+
+    if (absoluteSeconds < 60) {
         return (
-            <div className="TimeFromNow">
-                {seconds} secs {ago}
+            <div className={`TimeFromNow ${passedClass}`}>
+                <div className="TimeFromNow-time">{absoluteSeconds}</div>
+                <div className="TimeFromNow-subtitle">sec {ago}</div>
             </div>
         );
     }
 
-    const minutes = Math.floor(seconds / 60);
+    const minutes = Math.floor(absoluteSeconds / 60);
     const hours = Math.floor(minutes / 60);
-    const minutesToTheHour = pad(minutes % 60, 2, '0');
+    const minutesToTheHour = padStart(minutes % 60, 2, '0');
 
     if (hours) {
         return (
-            <div className="TimeFromNow">
-                {hours}h{minutesToTheHour} {ago}
+            <div className={`TimeFromNow ${passedClass}`}>
+                <div className="TimeFromNow-time">
+                    {hours}h{minutesToTheHour}
+                </div>
+                <div className="TimeFromNow-subtitle">{ago}</div>
             </div>
         );
     }
 
     return (
-        <div className="TimeFromNow">
-            {minutes} mins {ago}
+        <div className={`TimeFromNow ${passedClass}`}>
+            <div className="TimeFromNow-time">{minutes}</div>
+            <div className="TimeFromNow-subtitle">min {ago}</div>
         </div>
     );
 }

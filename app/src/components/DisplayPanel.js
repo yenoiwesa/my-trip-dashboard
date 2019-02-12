@@ -3,15 +3,15 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import IconButton from '@material-ui/core/IconButton';
 
 import './DisplayPanel.scss';
-import NextTripsService from '../services/NextTripsService';
+import TripDefinitionService from '../services/TripDefinitionService';
 import Trip from './Trip';
 
 function DisplayPanel(props) {
-    const [trips, setTrips] = useState([]);
+    const [tripDefinitions, setTripDefinitions] = useState([]);
 
     useEffect(() => {
-        const handle = NextTripsService.subscribe(trips => setTrips(trips));
-        return () => handle();
+        const subscription = TripDefinitionService.subscribe(tripDefs => setTripDefinitions(tripDefs));
+        return () => subscription.unsubscribe();
     }, []);
 
     return (
@@ -20,8 +20,8 @@ function DisplayPanel(props) {
                 <SettingsIcon />
             </IconButton>
             <div className="DisplayPanel-content">
-                {trips.map(trip => (
-                    <Trip trip={trip} key={trip.definition.id} />
+                {tripDefinitions.map(tripDefinition => (
+                    <Trip trip={tripDefinition} key={tripDefinition.id} />
                 ))}
             </div>
         </div>

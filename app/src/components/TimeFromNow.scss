@@ -1,0 +1,29 @@
+@import 'styles/layout';
+@import 'styles/colors';
+@import 'styles/typography';
+
+.TimeFromNow {
+    text-align: center;
+}
+
+.TimeFromNow-time {
+    font-size: 32px;
+}
+
+.TimeFromNow-subtitle {
+    color: $text-muted;
+}
+
+.TimeFromNow-passed {
+    color: $secondary-color;
+
+    .TimeFromNow-subtitle {
+        color: $secondary-light;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .TimeFromNow-time {
+        font-size: 40px;
+    }
+}

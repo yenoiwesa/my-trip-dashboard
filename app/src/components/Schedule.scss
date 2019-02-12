@@ -1,6 +1,75 @@
 @import 'styles/layout';
+@import 'styles/typography';
 
 .Schedule {
-    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.Schedule-depart,
+.Schedule-arrive {
     padding: $set-two;
+    border-radius: $set-one;
+    text-align: center;
+    min-width: 120px;
+    min-height: 120px;
+    box-sizing: border-box;
+}
+
+.Schedule-depart {
+    background-color: #f0f8ff;
+}
+
+.Schedule-arrive {
+    background-color: #ecf0f1;
+}
+
+.Schedule-arrive-time {
+    font-size: 28px;
+    margin-top: $set-one;
+}
+
+.Schedule-details {
+    flex: 1;
+    padding: $set-two;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    > * {
+        margin: $set-half 0;
+    }
+}
+
+.Schedule-transportations {
+    display: flex;
+    align-items: center;
+}
+
+.Schedule-transportation {
+    display: flex;
+    align-items: center;
+}
+
+.Schedule-transportation-mode {
+    margin-right: $set-half;
+}
+
+.Schedule-transportation-separator {
+    color: $text-muted;
+}
+
+.Schedule-timing {
+    display: flex;
+}
+
+.Schedule-duration {
+    margin-left: $set-two;
+    color: $text-muted;
+}
+
+@media only screen and (min-width: 1000px) {
+    .Schedule-arrive-time {
+        font-size: 32px;
+    }
 }

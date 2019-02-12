@@ -12,9 +12,9 @@ import TripDefinitionsService from '../services/TripDefinitionService';
 function TripDefinitionForm(props) {
     const [title, setTitle] = useState('');
     const [origin, setOrigin] = useState('');
-    const [originOffset, setOriginOffset] = useState('');
+    const [originOffset, setOriginOffset] = useState(0);
     const [destination, setDestination] = useState('');
-    const [destinationOffset, setDestinationOffset] = useState('');
+    const [destinationOffset, setDestinationOffset] = useState(0);
 
     function handleSubmit(event) {
         const trip = new TripDefinition(title, origin, originOffset, destination, destinationOffset);
@@ -23,9 +23,9 @@ function TripDefinitionForm(props) {
         // reset form
         setTitle('');
         setOrigin('');
-        setOriginOffset('');
+        setOriginOffset(0);
         setDestination('');
-        setDestinationOffset('');
+        setDestinationOffset(0);
 
         event.preventDefault();
     }
@@ -49,7 +49,7 @@ function TripDefinitionForm(props) {
             <StopAutocomplete required label="Origin" value={origin} onChange={stop => setOrigin(stop)} />
 
             <TextField
-                label="Origin offset"
+                label="Travel time to origin"
                 required
                 type="number"
                 value={originOffset}
@@ -65,7 +65,7 @@ function TripDefinitionForm(props) {
             <StopAutocomplete value={destination} label="Destination" onChange={stop => setDestination(stop)} />
 
             <TextField
-                label="Destination offset"
+                label="Travel time from destination"
                 required
                 type="number"
                 value={destinationOffset}

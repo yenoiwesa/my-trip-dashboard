@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { padStart } from 'lodash';
 
 import './TimeFromNow.scss';
+import TickService from '../services/TickService';
 
 function TimeFromNow(props) {
     const [now, setNow] = useState(new Date());
     useEffect(() => {
-        const intervalId = setInterval(() => setNow(new Date()), 1000);
-        return () => clearInterval(intervalId);
+        const handle = TickService.subscribe(now => setNow(now));
+        return () => handle();
     }, []);
 
     const seconds = Math.floor((new Date(props.datetime) - now) / 1000);
-
     const isPassed = seconds < 0;
     const absoluteSeconds = Math.abs(seconds);
     const ago = isPassed ? <span>ago</span> : null;

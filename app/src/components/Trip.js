@@ -49,12 +49,15 @@ async function fetchSchedules(tripDefinition, setSchedules) {
         const url = new URL('/api/trips', window.location.href);
         tripDefinition.toQueryParams(url);
         const response = await fetch(url);
-        schedules = await response.json();
+        const json = await response.json();
+        if (!json.error) {
+            schedules = json;
+        }
     } catch (error) {
-        schedules = [];
+        // continue
     }
 
-    setSchedules(schedules);
+    setSchedules(schedules || []);
 }
 
 export default Trip;

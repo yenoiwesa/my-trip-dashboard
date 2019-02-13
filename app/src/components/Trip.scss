@@ -3,6 +3,7 @@
 
 .Trip-heading {
     color: white;
+    width: 100%;
 }
 
 .Trip-title {
@@ -20,12 +21,21 @@
     background-color: #01497a;
     color: #ffffffb3;
     display: flex;
-    align-items: center;
-    justify-content: center;
     padding: $set-one;
 }
 
+.Trip-origin {
+    flex: 1;
+    text-align: right;
+}
+
+.Trip-destination {
+    flex: 1;
+    text-align: left;
+}
+
 .Trip-connection {
+    flex: none;
     display: flex;
     align-items: center;
     margin: 0 $set-two;
@@ -43,6 +53,8 @@
     list-style: none;
     margin: 0;
     padding: $set-two;
+    width: 100%;
+    max-width: 600px;
 
     > * {
         margin-bottom: $set-two;

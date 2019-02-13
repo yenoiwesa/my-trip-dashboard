@@ -4,11 +4,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 
 import TripDefinitionsService from '../services/TripDefinitionService';
 import './EditPanel.scss';
 import TripDefinitionForm from './TripDefinitionForm';
 import TripDefinition from './TripDefinition';
+
+const SortableTripDefinition = sortableElement(({ value }) => (
+    <TripDefinition trip={value} onDelete={trip => TripDefinitionsService.removeTrip(trip)} />
+));
+const SortableTripContainer = sortableContainer(({ children }) => <ul className="EditPanel-trip-details-list">{children}</ul>);
 
 function EditPanel(props) {
     const [tripDefinitions, setTripDefinitions] = useState([]);
@@ -41,15 +47,15 @@ function EditPanel(props) {
 
 function getTripDetails(tripDefinitions) {
     if (tripDefinitions.length) {
-        let index = 0;
         return (
-            <ul className="EditPanel-trip-details-list">
-                {tripDefinitions.map(trip => (
-                    <li key={index++}>
-                        <TripDefinition trip={trip} onDelete={trip => TripDefinitionsService.removeTrip(trip)} />
-                    </li>
+            <SortableTripContainer
+                distance={10}
+                onSortEnd={({ oldIndex, newIndex }) => TripDefinitionsService.reorderTrips(oldIndex, newIndex)}
+            >
+                {tripDefinitions.map((trip, index) => (
+                    <SortableTripDefinition key={trip.id} index={index} value={trip} />
                 ))}
-            </ul>
+            </SortableTripContainer>
         );
     }
     return <div className="EditPanel-no-trips">No trips added yet</div>;

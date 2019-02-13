@@ -57,6 +57,11 @@ function TripDefinitionForm(props) {
                 InputProps={{
                     endAdornment: <InputAdornment position="end">min</InputAdornment>
                 }}
+                // eslint-disable-next-line react/jsx-no-duplicate-props
+                inputProps={{
+                    min: '0',
+                    step: '0.5'
+                }}
                 InputLabelProps={{ required: false, shrink: true }}
                 fullWidth
                 margin="normal"
@@ -72,6 +77,11 @@ function TripDefinitionForm(props) {
                 onChange={event => setDestinationOffset(event.target.value)}
                 InputProps={{
                     endAdornment: <InputAdornment position="end">min</InputAdornment>
+                }}
+                // eslint-disable-next-line react/jsx-no-duplicate-props
+                inputProps={{
+                    min: '0',
+                    step: '0.5'
                 }}
                 InputLabelProps={{ required: false, shrink: true }}
                 fullWidth

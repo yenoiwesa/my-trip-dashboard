@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TripOriginIcon from '@material-ui/icons/TripOrigin';
 import LensIcon from '@material-ui/icons/Lens';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import FlipMove from 'react-flip-move';
 
 import './Trip.scss';
 import Schedule from './Schedule';
@@ -17,7 +18,6 @@ function Trip(props) {
         return () => clearInterval(intervalId);
     }, []);
 
-    let scheduleIndex = 0;
     return (
         <div className="Trip">
             <div className="Trip-heading">
@@ -32,13 +32,13 @@ function Trip(props) {
                     <div className="Trip-destination">{trip.destination.name}</div>
                 </div>
             </div>
-            <ul className="Trip-schedules">
+            <FlipMove className="Trip-schedules" typeName="ul">
                 {schedules.map(schedule => (
-                    <li key={scheduleIndex++}>
+                    <li key={schedule.id}>
                         <Schedule schedule={schedule} />
                     </li>
                 ))}
-            </ul>
+            </FlipMove>
         </div>
     );
 }

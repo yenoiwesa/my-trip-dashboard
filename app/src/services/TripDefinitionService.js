@@ -20,6 +20,17 @@ class TripDefinitionService extends BehaviorSubject {
         this.notify();
     }
 
+    reorderTrips(fromIndex, toIndex) {
+        // taken from arra-move npm project
+        this.tripDefinitions.splice(
+            toIndex < 0 ? this.tripDefinitions.length + toIndex : toIndex,
+            0,
+            this.tripDefinitions.splice(fromIndex, 1)[0]
+        );
+        this.persist();
+        this.notify();
+    }
+
     notify() {
         // must send a new object every time
         this.next(this.tripDefinitions.slice());

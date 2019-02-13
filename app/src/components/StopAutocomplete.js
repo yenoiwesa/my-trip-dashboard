@@ -99,7 +99,7 @@ function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, sele
         >
             <div className="StopAutocomplete-stop-name">{suggestion.name}</div>
             {suggestion.modes.map(mode => (
-                <Mode mode={mode} key="mode" className="StopAutocomplete-stop-mode" />
+                <Mode mode={mode} key={mode} className="StopAutocomplete-stop-mode" />
             ))}
         </MenuItem>
     );

@@ -1,11 +1,9 @@
 @import 'styles/colors';
-@import 'styles/typography';
 
 .App {
     background-color: $app-bg-color;
     width: 100vw;
     height: 100vh;
-    color: $text-normal;
     display: flex;
     flex-direction: column;
     overflow: hidden;

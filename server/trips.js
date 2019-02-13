@@ -53,13 +53,16 @@ const getTripDetails = async (origin, originOffset, destination, destinationOffs
 
     if (json.journeys) {
         for (const journey of json.journeys) {
-            const trip = { duration: 0, transportations: [] };
+            const trip = { duration: 0, transportations: [], id: 'trip-' };
             const modes = new Set();
             let stops = 0;
 
             for (let legIndex = 0; legIndex < journey.legs.length; legIndex++) {
                 const leg = journey.legs[legIndex];
                 const transportation = leg.transportation;
+
+                // build a unique trip id
+                trip.id += leg.origin.parent.id + leg.destination.arrivalTimePlanned;
 
                 trip.duration += leg.duration;
                 const mode = TRANSPORT_TYPES[transportation.product.class];

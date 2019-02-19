@@ -54,7 +54,7 @@
     margin: 0;
     padding: $set-two;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
 
     > * {
         margin-bottom: $set-two;
@@ -65,7 +65,7 @@
     }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: $desktop-min-width) {
     .Trip-title {
         font-size: 32px;
     }

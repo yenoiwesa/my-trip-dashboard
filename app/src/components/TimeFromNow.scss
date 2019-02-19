@@ -22,7 +22,7 @@
     }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: $desktop-min-width) {
     .TimeFromNow-time {
         font-size: 40px;
     }

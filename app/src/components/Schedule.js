@@ -29,6 +29,7 @@ function Schedule(props) {
             <div className="Schedule-arrive">
                 <div className="Schedule-arrive-title">Arrive</div>
                 <ScheduleTime datetime={schedule.arrival.offset} className="Schedule-arrive-time" />
+                <div>&nbsp;</div>
             </div>
         </div>
     );

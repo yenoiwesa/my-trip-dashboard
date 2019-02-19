@@ -1,5 +1,9 @@
 @import 'styles/typography';
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;

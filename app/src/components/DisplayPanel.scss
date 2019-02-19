@@ -14,10 +14,10 @@
     height: 100%;
     overflow: auto;
     display: flex;
-    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
 
     > * {
-        flex: 1;
+        flex: 0 0 100vw;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -36,12 +36,14 @@
     }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: $desktop-min-width) {
     .DisplayPanel {
         font-size: $font-lg;
     }
 
     .DisplayPanel-content {
-        flex-direction: row;
+        > * {
+            flex: 1;
+        }
     }
 }

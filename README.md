@@ -28,6 +28,8 @@ To start the production version of the server, you must first build the single p
 
 Then, you can start the node.js server with `npm run start`. The website will be available at `localhost:8080`.
 
+It is possible to change the default port number by passing the `port` argument: `npm run start -- --port=9090`.
+
 Note that you will be required to pass a `TRANSPORT_API_KEY` environment variable for the process to read.
 
 ---

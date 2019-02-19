@@ -3,12 +3,17 @@ const Router = require('koa-router');
 const serveStatic = require('koa-static');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger-winston');
+const parseArgs = require('minimist');
 
 const APIError = require('./apiError');
 const Config = require('./config');
 const logger = require('./logger');
 const stops = require('./stops');
 const trips = require('./trips');
+
+// read command line arguments
+const argv = parseArgs(process.argv.slice(2), { default: { port: Config.server.port } });
+const port = argv.port;
 
 const app = new Koa();
 
@@ -46,6 +51,5 @@ router.use('/stops', stops.router.routes(), stops.router.allowedMethods());
 router.use('/trips', trips.router.routes(), trips.router.allowedMethods());
 app.use(router.routes());
 
-let port = Config.server.port;
 app.listen(port);
 logger.info(`Server listening on port ${port}`);

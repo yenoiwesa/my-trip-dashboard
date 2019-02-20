@@ -1,5 +1,5 @@
 class TripDefinition {
-    constructor(title, origin, originOffset, destination, destinationOffset) {
+    constructor(title = '', origin = '', originOffset = 0, destination = '', destinationOffset = 0) {
         this.id = new Date().getTime();
         this.title = title;
         this.origin = origin;
@@ -15,7 +15,11 @@ class TripDefinition {
         url.searchParams.append('destinationOffset', this.destinationOffset * 60);
     }
 
-    toJson() {
+    update(tripData) {
+        Object.assign(this, tripData);
+    }
+
+    toObject() {
         return {
             id: this.id,
             title: this.title,
@@ -26,9 +30,9 @@ class TripDefinition {
         };
     }
 
-    static fromJson(json) {
-        const trip = new TripDefinition(json.title, json.origin, json.originOffset, json.destination, json.destinationOffset);
-        trip.id = json.id;
+    static fromObject(object) {
+        const trip = new TripDefinition(object.title, object.origin, object.originOffset, object.destination, object.destinationOffset);
+        trip.id = object.id;
         return trip;
     }
 }

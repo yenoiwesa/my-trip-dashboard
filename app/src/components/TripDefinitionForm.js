@@ -6,34 +6,35 @@ import TrainIcon from '@material-ui/icons/Train';
 
 import './TripDefinitionForm.scss';
 import StopAutocomplete from './StopAutocomplete';
-import TripDefinition from '../model/TripDefinition';
-import TripDefinitionsService from '../services/TripDefinitionService';
 
 function TripDefinitionForm(props) {
-    const [title, setTitle] = useState('');
-    const [origin, setOrigin] = useState('');
-    const [originOffset, setOriginOffset] = useState(0);
-    const [destination, setDestination] = useState('');
-    const [destinationOffset, setDestinationOffset] = useState(0);
+    const { trip, editing, onSubmit, onCancel } = props;
+    const [prevTrip, setPrevTrip] = useState(null);
+    const [title, setTitle] = useState();
+    const [origin, setOrigin] = useState();
+    const [originOffset, setOriginOffset] = useState();
+    const [destination, setDestination] = useState();
+    const [destinationOffset, setDestinationOffset] = useState();
+
+    if (trip !== prevTrip) {
+        // trip prop changed, reset from the new passed trip
+        setTitle(trip.title);
+        setOrigin(trip.origin);
+        setOriginOffset(trip.originOffset);
+        setDestination(trip.destination);
+        setDestinationOffset(trip.destinationOffset);
+        setPrevTrip(trip);
+    }
 
     function handleSubmit(event) {
-        const trip = new TripDefinition(title, origin, originOffset, destination, destinationOffset);
-        TripDefinitionsService.addTrip(trip);
-
-        // reset form
-        setTitle('');
-        setOrigin('');
-        setOriginOffset(0);
-        setDestination('');
-        setDestinationOffset(0);
-
         event.preventDefault();
+        onSubmit({ title, origin, originOffset, destination, destinationOffset });
     }
 
     return (
         <form className="TripDefinitionForm" onSubmit={handleSubmit}>
             <h2 className="TripDefinitionForm-heading">
-                <TrainIcon /> New trip details
+                <TrainIcon /> {editing ? 'Edit trip details' : 'New trip details'}
             </h2>
 
             <TextField
@@ -89,8 +90,13 @@ function TripDefinitionForm(props) {
             />
 
             <div className="TripDefinitionForm-actions">
+                {editing ? (
+                    <Button className="TripDefinitionForm-cancel" onClick={onCancel}>
+                        Cancel
+                    </Button>
+                ) : null}
                 <Button className="TripDefinitionForm-submit" type="submit" color="primary">
-                    Add trip
+                    {editing ? 'Save' : 'Add trip'}
                 </Button>
             </div>
         </form>

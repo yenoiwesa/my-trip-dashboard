@@ -7,7 +7,7 @@
 
 .TripDefinition-content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .TripDefinition-title {
@@ -23,10 +23,19 @@
 }
 
 .TripDefinition-actions {
-    flex: 0;
+    flex: none;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .TripDefinition-divider {
     color: $text-muted;
     margin: 0 $set-two;
+}
+
+@media only screen and (min-width: 600px) {
+    .TripDefinition-content {
+        flex-direction: row;
+        align-items: center;
+    }
 }

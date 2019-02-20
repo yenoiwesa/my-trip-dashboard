@@ -9,20 +9,31 @@ import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import TripDefinitionsService from '../services/TripDefinitionService';
 import './EditPanel.scss';
 import TripDefinitionForm from './TripDefinitionForm';
-import TripDefinition from './TripDefinition';
+import TripDefinitionComponent from './TripDefinition';
+import TripDefinition from '../model/TripDefinition';
 
 const SortableTripDefinition = sortableElement(({ value }) => (
-    <TripDefinition trip={value} onDelete={trip => TripDefinitionsService.removeTrip(trip)} />
+    <TripDefinitionComponent trip={value} onDelete={trip => TripDefinitionsService.removeTrip(trip)} />
 ));
 const SortableTripContainer = sortableContainer(({ children }) => <ul className="EditPanel-trip-details-list">{children}</ul>);
 
 function EditPanel(props) {
     const [tripDefinitions, setTripDefinitions] = useState([]);
+    const [editedTrip, setEditedTrip] = useState(new TripDefinition());
 
     useEffect(() => {
         const subscription = TripDefinitionsService.subscribe(trips => setTripDefinitions(trips));
         return () => subscription.unsubscribe();
     }, []);
+
+    function createTrip(tripData) {
+        const trip = new TripDefinition();
+        trip.update(tripData);
+        TripDefinitionsService.addTrip(trip);
+
+        // reset form
+        setEditedTrip(new TripDefinition());
+    }
 
     const tripDetails = getTripDetails(tripDefinitions);
 
@@ -37,7 +48,7 @@ function EditPanel(props) {
             </AppBar>
             <div className="EditPanel-main">
                 <Paper>
-                    <TripDefinitionForm elevation={1} />
+                    <TripDefinitionForm trip={editedTrip} onSubmit={tripData => createTrip(tripData)} elevation={1} />
                 </Paper>
                 <div className="EditPanel-trip-details">{tripDetails}</div>
             </div>

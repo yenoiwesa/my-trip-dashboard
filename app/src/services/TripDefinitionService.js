@@ -10,14 +10,20 @@ class TripDefinitionService extends BehaviorSubject {
 
     addTrip(tripDetails) {
         this.tripDefinitions.push(tripDetails);
-        this.persist();
-        this.notify();
+        this.save();
     }
 
     removeTrip(tripDefinition) {
         this.tripDefinitions = this.tripDefinitions.filter(tripDef => tripDef.id !== tripDefinition.id);
-        this.persist();
-        this.notify();
+        this.save();
+    }
+
+    updateTrip(tripId, tripData) {
+        const trip = this.tripDefinitions.find(trip => trip.id === tripId);
+        if (trip) {
+            trip.update(tripData);
+            this.save();
+        }
     }
 
     reorderTrips(fromIndex, toIndex) {
@@ -27,8 +33,7 @@ class TripDefinitionService extends BehaviorSubject {
             0,
             this.tripDefinitions.splice(fromIndex, 1)[0]
         );
-        this.persist();
-        this.notify();
+        this.save();
     }
 
     notify() {
@@ -36,15 +41,16 @@ class TripDefinitionService extends BehaviorSubject {
         this.next(this.tripDefinitions.slice());
     }
 
-    persist() {
-        const payload = this.tripDefinitions.map(tripDef => tripDef.toJson());
+    save() {
+        const payload = this.tripDefinitions.map(tripDef => tripDef.toObject());
         localStorage.setItem('TripDefinitions', JSON.stringify(payload));
+        this.notify();
     }
 
     hydrate() {
         try {
             const payload = JSON.parse(localStorage.getItem('TripDefinitions'));
-            this.tripDefinitions = payload.map(item => TripDefinition.fromJson(item));
+            this.tripDefinitions = payload.map(item => TripDefinition.fromObject(item));
         } catch (error) {
             this.tripDefinitions = [];
         }

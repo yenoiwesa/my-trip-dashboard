@@ -1,27 +1,16 @@
 import './App.scss';
 
 import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import deepOrange from '@material-ui/core/colors/deepOrange';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import { first } from 'rxjs/operators';
 
+import theme from './styles/theme';
 import EditPanel from './components/EditPanel';
 import DisplayPanel from './components/DisplayPanel';
 import TripDefinitionsService from './services/TripDefinitionService';
-
-const theme = createMuiTheme({
-    typography: {
-        useNextVariants: true
-    },
-    palette: {
-        primary: blue,
-        secondary: deepOrange
-    }
-});
 
 const generateClassName = createGenerateClassName();
 const jss = create({

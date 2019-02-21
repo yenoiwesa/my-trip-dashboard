@@ -5,15 +5,15 @@ import TripDefinitionService from '../services/TripDefinitionService';
 import TripDefinitionForm from './TripDefinitionForm';
 
 function EditTripModal(props) {
-    const { close } = props;
+    const { open, onClose } = props;
     function handleSave(tripData) {
         TripDefinitionService.updateTrip(props.trip.id, tripData);
-        close();
+        onClose();
     }
 
     return (
-        <Dialog open={true} fullWidth={true} maxWidth={'sm'} onClose={close} disableBackdropClick={true}>
-            <TripDefinitionForm trip={props.trip} editing={true} onSubmit={tripData => handleSave(tripData)} onCancel={close} />
+        <Dialog open={open} fullWidth={true} maxWidth={'sm'} onClose={onClose} disableBackdropClick={true}>
+            <TripDefinitionForm trip={props.trip} editing={true} onSubmit={tripData => handleSave(tripData)} onCancel={onClose} />
         </Dialog>
     );
 }
